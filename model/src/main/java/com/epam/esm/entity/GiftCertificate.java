@@ -1,31 +1,55 @@
 package com.epam.esm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class GiftCertificate extends Entity {
+public class GiftCertificate {
+
+    private long id;
+    @Size(min = 1, max = 80, message = "gift-certificate.invalidName")
     private String name;
+    @Size(min = 1, max = 250, message = "gift-certificate.invalidDescription")
     private String description;
+    @Min(value = 1, message = "gift-certificate.invalidPrice")
     private BigDecimal price;
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     private ZonedDateTime createDate;
-
-    private ZonedDateTime lastUpdateDate;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+    private ZonedDateTime lastUpdatedDate;
+    @Min(value = 1, message = "gift-certificate.invalidDuration")
     private int duration;
 
-    public GiftCertificate(long id) {
-        super(id);
+    List<Tag> tagList = new ArrayList<>();
+
+    public GiftCertificate() {
     }
 
-    public GiftCertificate(long id, String name, String description, BigDecimal price, ZonedDateTime createDate, ZonedDateTime lastUpdateDate, int duration) {
-        super(id);
+    public GiftCertificate(long id, String name, String description, BigDecimal price, ZonedDateTime createDate, ZonedDateTime lastUpdatedDate, int duration) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
+        this.lastUpdatedDate = lastUpdatedDate;
         this.duration = duration;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,12 +84,12 @@ public class GiftCertificate extends Entity {
         this.createDate = createDate;
     }
 
-    public ZonedDateTime getLastUpdateDate() {
-        return lastUpdateDate;
+    public ZonedDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
     }
 
-    public void setLastUpdateDate(ZonedDateTime lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
+    public void setLastUpdatedDate(ZonedDateTime lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 
     public int getDuration() {
@@ -76,29 +100,38 @@ public class GiftCertificate extends Entity {
         this.duration = duration;
     }
 
+    public List<Tag> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GiftCertificate that = (GiftCertificate) o;
-        return duration == that.duration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) && Objects.equals(lastUpdateDate, that.lastUpdateDate);
+        return duration == that.duration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, price, createDate, lastUpdateDate, duration);
+        return Objects.hash(name, description, price, createDate, lastUpdatedDate, duration);
     }
 
     @Override
     public String toString() {
         return "GiftCertificate{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", createDate=" + createDate +
-                ", lastUpdateDate=" + lastUpdateDate +
+                ", lastUpdatedDate=" + lastUpdatedDate +
                 ", duration=" + duration +
+                ", tagList=" + tagList +
                 '}';
     }
 }

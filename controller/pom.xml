@@ -23,6 +23,20 @@
             <artifactId>model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.14.0</version>
+        </dependency>
     </dependencies>
 
 
@@ -30,6 +44,33 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+<!--
+    <build>
+        <pluginManagement>
+            <plugins>
+                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin &ndash;&gt;
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <configuration>
+                        <port>8080</port>
+                        <path>/</path>
+                    </configuration>
+                    <version>2.2</version>
+                </plugin>
+                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin &ndash;&gt;
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.3.2</version>
+                     <configuration>
+                         <failOnMissingWebXml>false</failOnMissingWebXml>
+                     </configuration>
+                </plugin>
 
+            </plugins>
 
+        </pluginManagement>
+
+    </build>-->
 </project>
