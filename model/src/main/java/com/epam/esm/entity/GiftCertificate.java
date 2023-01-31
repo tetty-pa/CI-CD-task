@@ -1,7 +1,9 @@
 package com.epam.esm.entity;
 
+import com.epam.esm.entity.audit.EntityAuditListener;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
@@ -11,31 +13,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class GiftCertificate {
+@Entity
+@Table(name = "gift_certificates")
+@EntityListeners(EntityAuditListener.class)
+public class GiftCertificate extends AbstractEntity {
 
-    private long id;
     @Size(min = 1, max = 80, message = "gift-certificate.invalidName")
+    @Column(length = 80, nullable = false)
     private String name;
     @Size(min = 1, max = 250, message = "gift-certificate.invalidDescription")
+    @Column(length = 250, nullable = false)
     private String description;
     @Min(value = 1, message = "gift-certificate.invalidPrice")
+    @Column(nullable = false)
     private BigDecimal price;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+    @Column(name = "create_date", nullable = false, updatable = false)
     private ZonedDateTime createDate;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+    @Column(name = "last_updated_date", nullable = false)
     private ZonedDateTime lastUpdatedDate;
     @Min(value = 1, message = "gift-certificate.invalidDuration")
+    @Column(nullable = false)
     private int duration;
 
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinTable(name = "gift_certificate_has_tag",
+            joinColumns = @JoinColumn(name = "gift_certificate_id", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "ID")
+    )
     List<Tag> tagList = new ArrayList<>();
 
     public GiftCertificate() {
     }
 
     public GiftCertificate(long id, String name, String description, BigDecimal price, ZonedDateTime createDate, ZonedDateTime lastUpdatedDate, int duration) {
-        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -44,13 +58,6 @@ public class GiftCertificate {
         this.duration = duration;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -113,7 +120,7 @@ public class GiftCertificate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GiftCertificate that = (GiftCertificate) o;
-        return duration == that.duration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate) ;
+        return duration == that.duration && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(createDate, that.createDate);
     }
 
     @Override
@@ -124,7 +131,6 @@ public class GiftCertificate {
     @Override
     public String toString() {
         return "GiftCertificate{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +

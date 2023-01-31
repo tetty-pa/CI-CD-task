@@ -1,72 +1,72 @@
 package com.epam.esm;
 
+import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.util.QueryParameters;
 import com.epam.esm.entity.util.SortType;
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class QueryBuilder {
 
-    public static String buildUpdateColumnsQuery(Set<String> columns) {
-        StringBuilder query = new StringBuilder();
-        boolean isFirstElement = true;
-        for (String column : columns) {
-            if (!isFirstElement) {
-                query.append(", ");
-            } else {
-                isFirstElement = false;
-            }
-            query.append(column);
-            query.append("=?");
+
+    public static CriteriaQuery<GiftCertificate> buildGetAllByParametersQuery(QueryParameters queryParameters, CriteriaBuilder criteriaBuilder/*, CriteriaQuery<GiftCertificate> criteriaQuery*//*, Root<GiftCertificate> root*/) {
+        CriteriaQuery<GiftCertificate> criteriaQuery = criteriaBuilder.createQuery(GiftCertificate.class);
+        Root<GiftCertificate> root = criteriaQuery.from(GiftCertificate.class);
+
+        List<Predicate> restrictions = getPredicates(queryParameters, criteriaBuilder, root);
+        if (!restrictions.isEmpty()) {
+            criteriaQuery.select(root).where(restrictions.toArray(new Predicate[]{}));
         }
-        return query.toString();
+        getSorting(queryParameters, criteriaBuilder, criteriaQuery, root);
+        return criteriaQuery;
     }
 
-    public static String buildGetAllByParametersQuery(QueryParameters queryParameters) {
-        StringBuilder getAllByParametersQuery = new StringBuilder("SELECT * FROM gift_certificate");
-        String tagName = queryParameters.getTagName();
-        if (!StringUtils.isEmpty(tagName)) {
-            getAllByParametersQuery.append(" INNER JOIN gift_certificate_has_tag gcht on gift_certificate.id = gcht.gift_certificate_id " +
-                    "INNER JOIN tag t on gcht.tag_id = t.id ");
-            addParameter(getAllByParametersQuery, tagName);
-        }
-        String partOfName = queryParameters.getPartOfName();
-        if (!StringUtils.isEmpty(partOfName)) {
-            addPartParameter(getAllByParametersQuery, "gift_certificate.name", partOfName);
-        }
-        String partOfDescription = queryParameters.getPartOfDescription();
-        if (!StringUtils.isEmpty(partOfDescription)) {
-            addPartParameter(getAllByParametersQuery, "description", partOfDescription);
-        }
+    private static void getSorting(QueryParameters queryParameters, CriteriaBuilder criteriaBuilder, CriteriaQuery<GiftCertificate> criteriaQuery, Root<GiftCertificate> root) {
         SortType sortNameParam = queryParameters.getSortNameParam();
         if (sortNameParam != null) {
-            addSortParameter(getAllByParametersQuery, "gift_certificate.name", sortNameParam);
+            if (Objects.equals(sortNameParam, SortType.DESC)) {
+                criteriaBuilder.desc(root.get("name"));
+            }
+            if (Objects.equals(sortNameParam, SortType.ASC)) {
+                criteriaBuilder.asc(root.get("name"));
+            }
         }
         SortType sortDateParam = queryParameters.getSortDateParam();
         if (sortDateParam != null) {
-            addSortParameter(getAllByParametersQuery, "create_date", sortDateParam);
+            if (Objects.equals(sortDateParam, SortType.DESC)) {
+                criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createDate")));
+            }
+            if (Objects.equals(sortDateParam, SortType.ASC)) {
+                criteriaQuery.orderBy(criteriaBuilder.asc(root.get("createDate")));
+            }
         }
-
-        return getAllByParametersQuery.toString();
     }
 
-    private static void addParameter(StringBuilder query, String value) {
-        if (query.toString().contains("WHERE")) query.append(" AND ");
-        else query.append(" WHERE ");
-        query.append("t.name").append("='").append(value).append('\'');
+    private static List<Predicate> getPredicates(QueryParameters queryParameters, CriteriaBuilder criteriaBuilder, Root<GiftCertificate> root) {
+        List<Predicate> restrictions = new ArrayList<>();
+
+        List<String> tagNames = queryParameters.getTagNames();
+        if (tagNames != null && !tagNames.isEmpty()) {
+            restrictions = Arrays.stream(tagNames.toArray())
+                    .map(tagName -> criteriaBuilder.equal(root.join("tagList").get("name"), tagName))
+                    .collect(Collectors.toList());
+        }
+        String partOfName = queryParameters.getPartOfName();
+        if (!StringUtils.isEmpty(partOfName)) {
+            restrictions.add(criteriaBuilder.like(root.get("name"), "%" + partOfName + "%"));
+        }
+        String partOfDescription = queryParameters.getPartOfDescription();
+        if (!StringUtils.isEmpty(partOfDescription)) {
+            restrictions.add(criteriaBuilder.like(root.get("description"), "%" + partOfDescription + "%"));
+        }
+        return restrictions;
     }
 
-    private static void addPartParameter(StringBuilder query, String partParameter, String value) {
-        if (query.toString().contains("WHERE")) query.append(" AND ");
-        else query.append(" WHERE ");
-        query.append(partParameter).append(" LIKE '%").append(value).append("%'");
-    }
-
-    private static void addSortParameter(StringBuilder query, String sortParameter, SortType value) {
-        if (query.toString().contains("ORDER BY")) query.append(", ");
-        else query.append(" ORDER BY ");
-        query.append(sortParameter).append(" ").append(value.name());
-    }
 
 }

@@ -3,56 +3,47 @@ package com.epam.esm.dao;
 
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.util.QueryParameters;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-/**
- * DAO interface for Gift Certificate
- */
+
 public interface GiftCertificateDao {
 
     /**
      * Creates new Gift Certificate.
      *
      * @param giftCertificate Gift Certificate to create
-     * @return Optional<GiftCertificate> Certificate if founded or Empty if not
+     * @return GiftCertificate Certificate if founded or Empty if not
      */
-    Optional<GiftCertificate> create(GiftCertificate giftCertificate);
+    GiftCertificate create(GiftCertificate giftCertificate);
 
     /**
      * Updates    Gift Certificates.
      *
-     * @param id                        Gift Certificate id to update
-     * @param giftCertificateUpdateInfo information that needs to be updated
-     * @return boolean result
+     * @param giftCertificate Gift Certificate to update
+     * @return GiftCertificate updated giftCertificate
      */
-    boolean update(long id, Map<String, Object> giftCertificateUpdateInfo);
+    GiftCertificate update(GiftCertificate giftCertificate);
 
-    /**
-     * Adds Tag to Gift Certificates.
-     *
-     * @param giftCertificateId Gift Certificate id
-     * @param tagId             Tag id that needs to be added
-     * @return boolean result
-     */
-    boolean addTagToGiftCertificate(long giftCertificateId, long tagId);
 
     /**
      * Gets all Gift Certificates.
      *
+     * @param pageable object with pagination info(page number, page size)
      * @return List of Gift Certificates
      */
-    List<GiftCertificate> getAll();
+    List<GiftCertificate> getAll(Pageable pageable);
 
     /**
      * Gets all Gift Certificates with parameters.
      *
+     * @param pageable object with pagination info(page number, page size)
      * @param queryParameters Parameters to search
      * @return List of Gift Certificates
      */
-    List<GiftCertificate> getGiftCertificatesByParameters(QueryParameters queryParameters);
+    List<GiftCertificate> getGiftCertificatesByParameters(QueryParameters queryParameters, Pageable pageable);
 
     /**
      * Gets Gift Certificate by column name.
@@ -75,7 +66,6 @@ public interface GiftCertificateDao {
      * Deletes Gift Certificates.
      *
      * @param id Gift Certificate id to delete
-     * @return boolean result
      */
-    boolean deleteById(long id);
+    void deleteById(long id);
 }

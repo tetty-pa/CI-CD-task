@@ -3,25 +3,28 @@ package com.epam.esm.entity.util;
 
 import io.micrometer.common.util.StringUtils;
 
+import java.util.List;
+
 
 public class QueryParameters {
 
     private String partOfName;
     private String partOfDescription;
-    private String tagName;
+    private List<String> tagNames;
     private SortType sortNameParam;
     private SortType sortDateParam;
 
 
-    public QueryParameters(String partOfName, String partOfDescription, String tagName, SortType sortNameParam, SortType sortDateParam) {
+    public QueryParameters(String partOfName, String partOfDescription, List
+            <String> tagNames, SortType sortNameParam, SortType sortDateParam) {
         if (!StringUtils.isEmpty(partOfName)) {
             this.partOfName = partOfName;
         }
         if (!StringUtils.isEmpty(partOfDescription)) {
             this.partOfDescription = partOfDescription;
         }
-        if (!StringUtils.isEmpty(tagName)) {
-            this.tagName = tagName;
+        if (!tagNames.isEmpty()) {
+            this.tagNames = tagNames;
         }
         if (sortNameParam != null) {
             this.sortNameParam = sortNameParam;
@@ -48,12 +51,12 @@ public class QueryParameters {
         this.partOfDescription = partOfDescription;
     }
 
-    public String getTagName() {
-        return tagName;
+    public List<String> getTagNames() {
+        return tagNames;
     }
 
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public void setTagNames(List<String> tagNames) {
+        this.tagNames = tagNames;
     }
 
     public SortType getSortNameParam() {
@@ -72,7 +75,4 @@ public class QueryParameters {
         this.sortDateParam = sortDateParam;
     }
 
-    public boolean isEmpty() {
-        return partOfName == null && partOfDescription == null && tagName == null && sortNameParam == null && sortDateParam == null ;
-    }
 }

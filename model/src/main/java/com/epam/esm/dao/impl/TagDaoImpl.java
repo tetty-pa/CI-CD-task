@@ -2,45 +2,48 @@ package com.epam.esm.dao.impl;
 
 import com.epam.esm.dao.AbstractDao;
 import com.epam.esm.dao.TagDao;
+import com.epam.esm.entity.Order;
 import com.epam.esm.entity.Tag;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
-import java.util.List;
 import java.util.Optional;
 
 
 @Repository
 public class TagDaoImpl extends AbstractDao<Tag> implements TagDao {
-    private final JdbcTemplate jdbcTemplate;
-    private static final String SQL_CREATE_TAG = "INSERT INTO tag(name) VALUE(?)";
-    private static final String SQL_GET_ALL_TAGS_BY_GIFT_CERTIFICATE_ID =
-    "SELECT * FROM tag"+
-        " INNER JOIN gift_certificate_has_tag gcht on tag.id = gcht.tag_id"+
-        " WHERE gift_certificate_id = ?";
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
-    public TagDaoImpl(DataSource dataSource) {
-        super(new BeanPropertyRowMapper<>(Tag.class), new JdbcTemplate(dataSource), "tag");
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public TagDaoImpl() {
+        super(Tag.class, "tags");
     }
 
 
-    @Override
-    public Optional<Tag> create(Tag tag) {
-        String name = tag.getName();
-        jdbcTemplate.update(SQL_CREATE_TAG, name);
-        return getByColumn("name", name);
-    }
 
     @Override
-    public List<Tag> getAllByGiftCertificateId(long id) {
-       return jdbcTemplate.query(SQL_GET_ALL_TAGS_BY_GIFT_CERTIFICATE_ID
-               ,new BeanPropertyRowMapper<>(Tag.class), id);
+    public Optional<Tag> getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders(long userId) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tag> cq = cb.createQuery(Tag.class);
+        Root<Order> root = cq.from(Order.class);
+
+
+        Join<Tag, Order> tagOrderJoin = root.join("giftCertificate")
+                .join("tagList");
+
+        cq.select(root.get("giftCertificate").get("tagList"))
+                .where(cb.equal(root.get("user").get("id"), userId))
+                .groupBy(tagOrderJoin.get("id"))
+                .orderBy(cb.desc(cb.count(tagOrderJoin.get("id"))),
+                        cb.desc(cb.sum(root.get("cost"))));
+
+
+        return entityManager.createQuery(cq).getResultStream().findFirst();
     }
 
 }

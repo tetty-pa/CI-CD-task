@@ -5,13 +5,16 @@ import com.epam.esm.entity.Tag;
 
 import java.util.List;
 
+
 public interface TagService {
     /**
      * Gets all Tags.
      *
+     * @param page page number for pagination
+     * @param size   page size for pagination
      * @return List of Tags
      */
-    List<Tag> getAll();
+    List<Tag> getAll(int page, int size);
 
     /**
      * Creates new Tag.
@@ -33,7 +36,15 @@ public interface TagService {
      * Deletes Gift Certificates.
      *
      * @param id Tag id to delete
-     * @return boolean result
      */
-    boolean deleteById(long id);
+    void deleteById(long id);
+
+    /**
+     * Gets Most Widely Used Tag Of User With Highest Cost Of All Orders Tag .
+     *
+     * @param userId User id to get
+     * @return Tag
+     */
+    Tag getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders(long userId);
+
 }

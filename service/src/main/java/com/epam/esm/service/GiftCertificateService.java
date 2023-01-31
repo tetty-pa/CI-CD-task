@@ -14,17 +14,21 @@ public interface GiftCertificateService {
     /**
      * Gets all Tags.
      *
+     * @param page   page number for pagination
+     * @param size   page size for pagination
      * @return List of all Gift Certificates
      */
-    List<GiftCertificate> getAll();
+    List<GiftCertificate> getAll(int page, int size);
 
     /**
      * Gets all Gift Certificates with parameters.
      *
      * @param queryParameters Parameters to search
+     * @param page   page number for pagination
+     * @param size   page size for pagination
      * @return List of Gift Certificates
      */
-    List<GiftCertificate> getGiftCertificatesByParameters(QueryParameters queryParameters);
+    List<GiftCertificate> getGiftCertificatesByParameters(QueryParameters queryParameters, int page, int size);
 
     /**
      * Gets Gift Certificate by id.
@@ -38,7 +42,7 @@ public interface GiftCertificateService {
      * Creates new Gift Certificate.
      *
      * @param giftCertificate Gift Certificate to create
-     * @return GiftCertificate
+     * @return created GiftCertificate
      */
     GiftCertificate create(GiftCertificate giftCertificate);
 
@@ -46,15 +50,14 @@ public interface GiftCertificateService {
      * Updates    Gift Certificates.
      *
      * @param giftCertificate Gift Certificate that needs to be updated
-     * @return boolean result
+     * @return updated GiftCertificate
      */
-    boolean update(GiftCertificate giftCertificate);
+    GiftCertificate update(GiftCertificate giftCertificate);
 
     /**
      * Deletes Gift Certificates.
      *
      * @param id Gift Certificate id to delete
-     * @return boolean result
      */
-    boolean deleteById(long id);
+    void deleteById(long id);
 }

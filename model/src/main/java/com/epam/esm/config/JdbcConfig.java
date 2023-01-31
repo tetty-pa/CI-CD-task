@@ -3,16 +3,20 @@ package com.epam.esm.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
+
 @Configuration
+@EntityScan(basePackages = "com.epam.esm")
+@EnableJpaAuditing
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 public class JdbcConfig {
@@ -51,9 +55,6 @@ public class JdbcConfig {
         return new HikariDataSource(hikariConfig);
     }
 
-    @Bean
-    public JdbcTemplate getJdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
 
 }
+

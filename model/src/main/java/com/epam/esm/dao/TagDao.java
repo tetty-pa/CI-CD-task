@@ -1,13 +1,12 @@
 package com.epam.esm.dao;
 
 import com.epam.esm.entity.Tag;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
 
-/**
- * DAO interface for Tag
- */
+
 public interface TagDao {
     /**
      * Creates new Tag.
@@ -15,14 +14,15 @@ public interface TagDao {
      * @param tag Tag to create
      * @return Optional<Tag> Tag if founded or Empty if not
      */
-    Optional<Tag> create(Tag tag);
+    Tag create(Tag tag);
 
     /**
      * Gets all Tags.
      *
+     * @param pageable object with pagination info(page number, page size)
      * @return List of Tags
      */
-    List<Tag> getAll();
+    List<Tag> getAll(Pageable pageable);
 
     /**
      * Gets Tag by column name.
@@ -45,15 +45,16 @@ public interface TagDao {
      * Deletes Tag.
      *
      * @param id Tag id to delete
-     * @return boolean result
      */
-    boolean deleteById(long id);
+    void deleteById(long id);
+
 
     /**
-     * Gets all Tags by Gift Certificate id.
+     * Gets Most Widely Used Tag Of User With Highest Cost Of All Orders Tag .
      *
-     * @param id Gift Certificate id
-     * @return List of Tags
+     * @param userId User id to get
+     * @return Optional<Tag>
      */
-    List<Tag> getAllByGiftCertificateId(long id);
+    Optional<Tag> getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders(long userId);
+
 }
