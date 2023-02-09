@@ -1,9 +1,8 @@
 package com.epam.esm.service.impl;
 
-import com.epam.esm.dao.impl.GiftCertificateDaoImpl;
-import com.epam.esm.dao.impl.OrderDaoImpl;
-import com.epam.esm.dao.impl.UserDaoImpl;
-import com.epam.esm.entity.GiftCertificate;
+import com.epam.esm.repository.impl.GiftCertificateRepositoryImpl;
+import com.epam.esm.repository.impl.OrderRepositoryImpl;
+import com.epam.esm.repository.impl.UserRepositoryImpl;
 import com.epam.esm.entity.Order;
 import com.epam.esm.exception.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
@@ -19,20 +18,19 @@ import java.util.Optional;
 import static com.epam.esm.service.impl.util.Constants.*;
 import static com.epam.esm.service.impl.util.Constants.PAGE_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
 
     @Mock
-    private OrderDaoImpl orderDao;
+    private OrderRepositoryImpl orderDao;
 
     @Mock
-    private UserDaoImpl userDao;
+    private UserRepositoryImpl userDao;
 
     @Mock
-    private GiftCertificateDaoImpl giftCertificateDao;
+    private GiftCertificateRepositoryImpl giftCertificateDao;
 
     @InjectMocks
     private OrderServiceImpl orderService;

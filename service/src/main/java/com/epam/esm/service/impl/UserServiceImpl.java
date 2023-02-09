@@ -1,7 +1,7 @@
 package com.epam.esm.service.impl;
 
 
-import com.epam.esm.dao.UserDao;
+import com.epam.esm.repository.UserRepository;
 import com.epam.esm.entity.User;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.service.UserService;
@@ -13,22 +13,22 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserDao userDao;
+    private final UserRepository userRepository;
 
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public List<User> getAll(int page, int size) {
         Pageable pageRequest = PageRequest.of(page, size);
 
-        return userDao.getAll(pageRequest);
+        return userRepository.getAll(pageRequest);
     }
 
     @Override
     public User getById(long id) throws EntityNotFoundException {
-        return userDao.getById(id)
+        return userRepository.getById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
     }
 }

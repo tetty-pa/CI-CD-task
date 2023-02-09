@@ -1,39 +1,41 @@
-package com.epam.esm.dao.impl;
+package com.epam.esm.repository.impl;
 
 import com.epam.esm.config.Config;
-import com.epam.esm.entity.Tag;
+import com.epam.esm.entity.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
-import static com.epam.esm.dao.impl.util.Constants.FIRST_TEST_TAG;
+import static com.epam.esm.repository.impl.util.Constants.FIRST_TEST_ORDER;
+import static com.epam.esm.repository.impl.util.Constants.SECOND_TEST_ORDER;
 import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(
         classes = {Config.class},
         loader = AnnotationConfigContextLoader.class)
 @Transactional
 @DirtiesContext
-class TagDaoImplTest {
+class OrderRepositoryImplTest {
 
-    private final TagDaoImpl tagDao;
+    private final OrderRepositoryImpl orderDao;
 
     @Autowired
-    public TagDaoImplTest(TagDaoImpl tagDao) {
-        this.tagDao = tagDao;
+    public OrderRepositoryImplTest(OrderRepositoryImpl orderDao) {
+        this.orderDao = orderDao;
     }
 
     @Test
-    void getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders() {
-        Optional<Tag> actual = tagDao.getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders(1);
-        assertEquals(Optional.of(FIRST_TEST_TAG), actual);
+    void getAllByUserId() {
+        List<Order> actual = orderDao.getAllByUserId(1, PageRequest.of(0, 25));
+        List<Order> expected = List.of(FIRST_TEST_ORDER, SECOND_TEST_ORDER);
+        assertEquals(expected, actual);
     }
 }

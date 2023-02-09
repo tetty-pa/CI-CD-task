@@ -1,6 +1,6 @@
 package com.epam.esm.service.impl;
 
-import com.epam.esm.dao.impl.GiftCertificateDaoImpl;
+import com.epam.esm.repository.impl.GiftCertificateRepositoryImpl;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.util.QueryParameters;
 import com.epam.esm.exception.DuplicateEntityException;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 class GiftCertificateServiceImplTest {
 
     @Mock
-    private GiftCertificateDaoImpl giftCertificateDao;
+    private GiftCertificateRepositoryImpl giftCertificateDao;
 
     @InjectMocks
     private GiftCertificateServiceImpl giftCertificateService;

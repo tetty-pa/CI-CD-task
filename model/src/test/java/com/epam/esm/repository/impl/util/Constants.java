@@ -1,4 +1,4 @@
-package com.epam.esm.dao.impl.util;
+package com.epam.esm.repository.impl.util;
 
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Order;

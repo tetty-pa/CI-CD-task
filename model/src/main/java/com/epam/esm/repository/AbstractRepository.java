@@ -1,21 +1,20 @@
-package com.epam.esm.dao;
+package com.epam.esm.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 
-public abstract class AbstractDao<T> {
+public abstract class AbstractRepository<T> {
 
     @PersistenceContext
     private EntityManager entityManager;
     private final Class<T> entityType;
 
-    public AbstractDao(Class<T> entityType, String tableName) {
+    public AbstractRepository(Class<T> entityType, String tableName) {
         this.entityType = entityType;
 
     }

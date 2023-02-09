@@ -1,4 +1,4 @@
-package com.epam.esm.dao;
+package com.epam.esm.repository;
 
 
 import com.epam.esm.entity.GiftCertificate;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface GiftCertificateDao {
+public interface GiftCertificateRepository {
 
     /**
      * Creates new Gift Certificate.

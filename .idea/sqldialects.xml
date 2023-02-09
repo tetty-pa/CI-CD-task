@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/model/src/main/java/com/epam/esm/dao/GiftCertificateDao.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/model/src/main/java/com/epam/esm/dao/impl/GiftCertificateDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/model/src/main/java/com/epam/esm/dao/impl/TagDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/java/com/epam/esm/repository/GiftCertificateRepository.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/java/com/epam/esm/repository/impl/GiftCertificateRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/java/com/epam/esm/repository/impl/TagRepositoryImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources/db.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources/gift-certificate-data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources/gift-certificate-has-tag-data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources/order-data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources/tag-data.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/model/src/main/resources/user-data.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/model/src/test/resources/createDB.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/model/src/test/resources/fillDB.sql" dialect="GenericSQL" />
   </component>

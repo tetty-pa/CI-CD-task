@@ -1,8 +1,8 @@
 package com.epam.esm.service.impl;
 
-import com.epam.esm.dao.GiftCertificateDao;
-import com.epam.esm.dao.OrderDao;
-import com.epam.esm.dao.UserDao;
+import com.epam.esm.repository.GiftCertificateRepository;
+import com.epam.esm.repository.OrderRepository;
+import com.epam.esm.repository.UserRepository;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Order;
 import com.epam.esm.entity.User;
@@ -19,44 +19,44 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderDao orderDao;
-    private final UserDao userDao;
-    private final GiftCertificateDao giftCertificateDao;
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    private final GiftCertificateRepository giftCertificateRepository;
 
 
-    public OrderServiceImpl(OrderDao orderDao, UserDao userDao, GiftCertificateDao giftCertificateDao) {
-        this.orderDao = orderDao;
-        this.userDao = userDao;
-        this.giftCertificateDao = giftCertificateDao;
+    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, GiftCertificateRepository giftCertificateRepository) {
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+        this.giftCertificateRepository = giftCertificateRepository;
     }
 
     @Override
     public List<Order> getAllByUserId(long userId, int page, int size) {
-        userDao.getById(userId)
+        userRepository.getById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
 
         Pageable pageRequest = PageRequest.of(page, size);
 
-        return orderDao.getAllByUserId(userId, pageRequest);
+        return orderRepository.getAllByUserId(userId, pageRequest);
     }
 
     @Override
     @Transactional
     public Order create(long userId, long certificateId) {
         Order order = new Order();
-        User user = userDao.getById(userId)
+        User user = userRepository.getById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
         order.setUser(user);
 
-        GiftCertificate giftCertificate = giftCertificateDao.getById(certificateId)
+        GiftCertificate giftCertificate = giftCertificateRepository.getById(certificateId)
                 .orElseThrow(() -> new EntityNotFoundException("gift-certificate.notfoundById"));
         order.setGiftCertificate(giftCertificate);
         order.setCost(giftCertificate.getPrice());
-        return orderDao.create(order);
+        return orderRepository.create(order);
     }
 
     @Override
     public Order getById(long orderId) {
-        return orderDao.getById(orderId).orElseThrow(()->new EntityNotFoundException("order.notfoundById"));
+        return orderRepository.getById(orderId).orElseThrow(()->new EntityNotFoundException("order.notfoundById"));
     }
 }

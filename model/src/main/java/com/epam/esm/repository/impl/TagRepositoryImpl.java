@@ -1,7 +1,7 @@
-package com.epam.esm.dao.impl;
+package com.epam.esm.repository.impl;
 
-import com.epam.esm.dao.AbstractDao;
-import com.epam.esm.dao.TagDao;
+import com.epam.esm.repository.AbstractRepository;
+import com.epam.esm.repository.TagRepository;
 import com.epam.esm.entity.Order;
 import com.epam.esm.entity.Tag;
 import jakarta.persistence.EntityManager;
@@ -14,13 +14,13 @@ import java.util.Optional;
 
 
 @Repository
-public class TagDaoImpl extends AbstractDao<Tag> implements TagDao {
+public class TagRepositoryImpl extends AbstractRepository<Tag> implements TagRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public TagDaoImpl() {
+    public TagRepositoryImpl() {
         super(Tag.class, "tags");
     }
 

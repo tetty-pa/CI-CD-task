@@ -34,10 +34,10 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
-<!--    <build>
+    <build>
         <pluginManagement>
             <plugins>
-                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin &ndash;&gt;
+                <!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin -->
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
@@ -47,7 +47,7 @@
                     </configuration>
                     <version>2.2</version>
                 </plugin>
-                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin &ndash;&gt;
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -61,5 +61,5 @@
 
         </pluginManagement>
 
-    </build>-->
+    </build>
 </project>

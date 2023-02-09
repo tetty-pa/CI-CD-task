@@ -1,4 +1,4 @@
-package com.epam.esm.dao;
+package com.epam.esm.repository;
 
 import com.epam.esm.entity.Order;
 import org.springframework.data.domain.Pageable;
@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderDao {
+public interface OrderRepository {
     /**
      * Creates new Order.
      *

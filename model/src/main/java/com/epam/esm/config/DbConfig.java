@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @EnableJpaAuditing
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-public class JdbcConfig {
+public class DbConfig {
     @Value("${db.name}")
     private String driverClass;
     @Value("${db.url}")

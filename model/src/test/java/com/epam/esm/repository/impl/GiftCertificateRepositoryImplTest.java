@@ -1,10 +1,9 @@
-package com.epam.esm.dao.impl;
+package com.epam.esm.repository.impl;
 
 import com.epam.esm.config.Config;
 
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.util.QueryParameters;
-import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-import static com.epam.esm.dao.impl.util.Constants.*;
+import static com.epam.esm.repository.impl.util.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -26,13 +25,13 @@ import static org.junit.jupiter.api.Assertions.*;
         loader = AnnotationConfigContextLoader.class)
 @Transactional
 @DirtiesContext
-class GiftCertificateDaoImplTest {
+class GiftCertificateRepositoryImplTest {
 
-    private final GiftCertificateDaoImpl giftCertificateDao;
+    private final GiftCertificateRepositoryImpl giftCertificateDao;
 
 
     @Autowired
-    GiftCertificateDaoImplTest(GiftCertificateDaoImpl giftCertificateDao) {
+    GiftCertificateRepositoryImplTest(GiftCertificateRepositoryImpl giftCertificateDao) {
         this.giftCertificateDao = giftCertificateDao;
     }
 

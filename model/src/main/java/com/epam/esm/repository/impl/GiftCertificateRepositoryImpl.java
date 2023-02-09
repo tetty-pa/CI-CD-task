@@ -1,8 +1,8 @@
-package com.epam.esm.dao.impl;
+package com.epam.esm.repository.impl;
 
 import com.epam.esm.QueryBuilder;
-import com.epam.esm.dao.AbstractDao;
-import com.epam.esm.dao.GiftCertificateDao;
+import com.epam.esm.repository.AbstractRepository;
+import com.epam.esm.repository.GiftCertificateRepository;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.util.QueryParameters;
 import jakarta.persistence.EntityManager;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
-public class GiftCertificateDaoImpl extends AbstractDao<GiftCertificate> implements GiftCertificateDao {
+public class GiftCertificateRepositoryImpl extends AbstractRepository<GiftCertificate> implements GiftCertificateRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public GiftCertificateDaoImpl() {
+    public GiftCertificateRepositoryImpl() {
         super(GiftCertificate.class, "gift_certificates");
     }
 

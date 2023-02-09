@@ -5,6 +5,7 @@ import com.epam.esm.entity.util.QueryParameters;
 import com.epam.esm.entity.util.SortType;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.service.GiftCertificateService;
+import com.epam.esm.service.impl.GiftCertificateServiceImpl;
 import com.epam.esm.web.link.GiftCertificateLinkAdder;
 import io.micrometer.common.util.StringUtils;
 import jakarta.validation.Valid;

@@ -1,7 +1,7 @@
-package com.epam.esm.dao.impl;
+package com.epam.esm.repository.impl;
 
-import com.epam.esm.dao.AbstractDao;
-import com.epam.esm.dao.OrderDao;
+import com.epam.esm.repository.AbstractRepository;
+import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.entity.Order;
 import com.epam.esm.entity.User;
 import jakarta.persistence.EntityManager;
@@ -14,12 +14,12 @@ import java.util.List;
 
 
 @Repository
-public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
+public class OrderRepositoryImpl extends AbstractRepository<Order> implements OrderRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public OrderDaoImpl() {
+    public OrderRepositoryImpl() {
         super(Order.class, "orders");
     }
 
