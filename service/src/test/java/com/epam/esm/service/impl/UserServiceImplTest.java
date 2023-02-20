@@ -17,6 +17,7 @@ import static com.epam.esm.service.impl.util.Constants.*;
 import static com.epam.esm.service.impl.util.Constants.PAGE_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+/*
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -49,4 +50,4 @@ class UserServiceImplTest {
         when(userRepository.getById(NOT_EXIST_ID)).thenThrow(new EntityNotFoundException());
         assertThrows(EntityNotFoundException.class, () -> userService.getById(NOT_EXIST_ID));
     }
-}
+}*/

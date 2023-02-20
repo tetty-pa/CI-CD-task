@@ -5,7 +5,6 @@ import com.epam.esm.entity.util.QueryParameters;
 import com.epam.esm.entity.util.SortType;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.service.GiftCertificateService;
-import com.epam.esm.service.impl.GiftCertificateServiceImpl;
 import com.epam.esm.web.link.GiftCertificateLinkAdder;
 import io.micrometer.common.util.StringUtils;
 import jakarta.validation.Valid;
@@ -97,13 +96,13 @@ public class GiftCertificatesController {
         SortType sortTypeName = null;
         if (!StringUtils.isEmpty(sortNameParam))
             sortTypeName = SortType.findSortType(sortNameParam);
-        SortType sortTypeDescription = null;
+        SortType sortTypeDate = null;
         if (!StringUtils.isEmpty(sortDateParam))
-            sortTypeDescription = SortType.findSortType(sortDateParam);
+            sortTypeDate = SortType.findSortType(sortDateParam);
 
-        List<GiftCertificate> giftCertificatesByParameters = giftCertificateService.getGiftCertificatesByParameters(new QueryParameters(partOfName,
-                partOfDescription,
-                tagNames, sortTypeName, sortTypeDescription), page, size);
+        List<GiftCertificate> giftCertificatesByParameters = giftCertificateService.
+                getGiftCertificatesByParameters(new QueryParameters(partOfName, partOfDescription,
+                tagNames, sortTypeName, sortTypeDate), page, size);
 
 
         giftCertificatesByParameters.forEach(linkAdder::addLinks);

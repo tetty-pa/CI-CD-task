@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllByUserId(long userId, int page, int size) {
-        userRepository.getById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
 
         Pageable pageRequest = PageRequest.of(page, size);
@@ -44,19 +44,20 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public Order create(long userId, long certificateId) {
         Order order = new Order();
-        User user = userRepository.getById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
         order.setUser(user);
 
-        GiftCertificate giftCertificate = giftCertificateRepository.getById(certificateId)
+        GiftCertificate giftCertificate = giftCertificateRepository.findById(certificateId)
                 .orElseThrow(() -> new EntityNotFoundException("gift-certificate.notfoundById"));
         order.setGiftCertificate(giftCertificate);
         order.setCost(giftCertificate.getPrice());
-        return orderRepository.create(order);
+        return orderRepository.save(order);
     }
 
     @Override
     public Order getById(long orderId) {
-        return orderRepository.getById(orderId).orElseThrow(()->new EntityNotFoundException("order.notfoundById"));
+        return orderRepository.findById(orderId)
+                .orElseThrow(()->new EntityNotFoundException("order.notfoundById"));
     }
 }

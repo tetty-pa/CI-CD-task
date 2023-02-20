@@ -15,9 +15,8 @@
     <dependencies>
         <dependency>
             <groupId>com.epam.esm</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -34,10 +33,10 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
-    <build>
+<!--    <build>
         <pluginManagement>
             <plugins>
-                <!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin -->
+                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat7-maven-plugin &ndash;&gt;
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
@@ -47,7 +46,7 @@
                     </configuration>
                     <version>2.2</version>
                 </plugin>
-                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+                &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin &ndash;&gt;
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -61,5 +60,5 @@
 
         </pluginManagement>
 
-    </build>
+    </build>-->
 </project>

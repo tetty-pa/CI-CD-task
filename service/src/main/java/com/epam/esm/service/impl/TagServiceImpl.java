@@ -30,36 +30,36 @@ public class TagServiceImpl implements TagService {
     public List<Tag> getAll(int page, int size) {
         Pageable pageRequest = PageRequest.of(page, size);
 
-        return tagRepository.getAll(pageRequest);
+        return tagRepository.findAll(pageRequest).getContent();
     }
 
     @Transactional
     @Override
     public Tag create(Tag tag) {
-        boolean isTagExist = tagRepository.getByColumn("name", tag.getName()).isPresent();
+        boolean isTagExist = tagRepository.findByName(tag.getName()).isPresent();
         if (isTagExist) {
             throw new DuplicateEntityException("tag.already.exist");
         }
-        return tagRepository.create(tag);
+        return tagRepository.save(tag);
     }
 
     @Override
     public Tag getById(long id) {
-        return tagRepository.getById(id)
+        return tagRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("tag.notfoundById"));
     }
 
     @Override
     @Transactional
     public void deleteById(long id) {
-        tagRepository.getById(id)
+        tagRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("tag.notfoundById"));
         tagRepository.deleteById(id);
     }
 
     @Override
     public Tag getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders(long userId) {
-        userRepository.getById(userId)
+        userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
         return tagRepository.getMostWidelyUsedTagOfUserWithHighestCostOfAllOrders(userId)
                 .orElseThrow(() -> new EntityNotFoundException("order.notfoundById"));

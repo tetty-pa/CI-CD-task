@@ -23,12 +23,12 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll(int page, int size) {
         Pageable pageRequest = PageRequest.of(page, size);
 
-        return userRepository.getAll(pageRequest);
+        return userRepository.findAll(pageRequest).getContent();
     }
 
     @Override
     public User getById(long id) throws EntityNotFoundException {
-        return userRepository.getById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
     }
 }
