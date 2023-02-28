@@ -1,15 +1,15 @@
 package com.epam.esm.web.controller;
 
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.util.QueryParameters;
-import com.epam.esm.entity.util.SortType;
+import com.epam.esm.model.entity.GiftCertificate;
+import com.epam.esm.model.entity.util.QueryParameters;
+import com.epam.esm.model.entity.util.SortType;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.service.GiftCertificateService;
 import com.epam.esm.web.link.GiftCertificateLinkAdder;
-import io.micrometer.common.util.StringUtils;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,7 +83,9 @@ public class GiftCertificatesController {
         return giftCertificate;
     }
 
+
     @GetMapping("/params")
+    @ResponseStatus(HttpStatus.OK)
     public List<GiftCertificate> getGiftCertificatesByParameters
             (@RequestParam(name = "tag_name", required = false) List<String> tagNames,
              @RequestParam(name = "part_of_name", required = false) String partOfName,

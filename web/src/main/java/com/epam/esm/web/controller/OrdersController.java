@@ -1,6 +1,6 @@
 package com.epam.esm.web.controller;
 
-import com.epam.esm.entity.Order;
+import com.epam.esm.model.entity.Order;
 import com.epam.esm.service.OrderService;
 import com.epam.esm.web.link.OrdersLinkAdder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users/{userId}/orders")
+@RequestMapping("/orders")
 public class OrdersController {
 
     private final OrderService orderService;
@@ -22,7 +22,7 @@ public class OrdersController {
         this.linkAdder = linkAdder;
     }
 
-    @GetMapping()
+    @GetMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<Order> getAll(@PathVariable long userId,
                               @RequestParam(value = "page", defaultValue = "0", required = false) int page,
@@ -33,7 +33,7 @@ public class OrdersController {
         return all;
     }
 
-    @PostMapping()
+    @PostMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public Order create(@PathVariable long userId,
                         @RequestParam long certificateId) {

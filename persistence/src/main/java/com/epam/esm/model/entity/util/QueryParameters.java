@@ -1,7 +1,6 @@
-package com.epam.esm.entity.util;
+package com.epam.esm.model.entity.util;
 
 
-import io.micrometer.common.util.StringUtils;
 
 import java.util.List;
 

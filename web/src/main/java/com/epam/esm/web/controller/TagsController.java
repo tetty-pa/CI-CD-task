@@ -1,11 +1,11 @@
 package com.epam.esm.web.controller;
 
 
-import com.epam.esm.entity.Tag;
+import com.epam.esm.model.entity.Tag;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.service.TagService;
 import com.epam.esm.web.link.TagLinkAdder;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

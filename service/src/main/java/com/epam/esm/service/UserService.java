@@ -1,6 +1,7 @@
 package com.epam.esm.service;
 
-import com.epam.esm.entity.User;
+import com.epam.esm.model.entity.Tag;
+import com.epam.esm.model.entity.User;
 import com.epam.esm.exception.EntityNotFoundException;
 
 import java.util.List;
@@ -21,5 +22,13 @@ public interface UserService {
      * @return User
      */
     User getById(long id) throws EntityNotFoundException;
+    /**
+     * Creates new User.
+     *
+     * @param user User to create
+     * @return User
+     */
+    User create(User user);
+
 
 }

@@ -1,6 +1,6 @@
 package com.epam.esm.web.link;
 
-import com.epam.esm.entity.GiftCertificate;
+import com.epam.esm.model.entity.GiftCertificate;
 import com.epam.esm.web.controller.GiftCertificatesController;
 import com.epam.esm.web.controller.TagsController;
 import org.springframework.stereotype.Component;

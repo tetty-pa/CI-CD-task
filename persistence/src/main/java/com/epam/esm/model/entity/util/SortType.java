@@ -1,4 +1,4 @@
-package com.epam.esm.entity.util;
+package com.epam.esm.model.entity.util;
 
 import com.epam.esm.exception.InvalidParameterException;
 

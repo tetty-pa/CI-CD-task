@@ -1,6 +1,6 @@
 package com.epam.esm.service;
 
-import com.epam.esm.entity.Order;
+import com.epam.esm.model.entity.Order;
 
 import java.util.List;
 

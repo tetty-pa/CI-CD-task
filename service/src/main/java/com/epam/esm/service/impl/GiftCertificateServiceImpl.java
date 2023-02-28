@@ -1,13 +1,13 @@
 package com.epam.esm.service.impl;
 
-import com.epam.esm.entity.util.SortType;
+import com.epam.esm.model.entity.util.SortType;
 import com.epam.esm.exception.DuplicateEntityException;
 import com.epam.esm.service.GiftCertificateService;
 import com.epam.esm.repository.GiftCertificateRepository;
 import com.epam.esm.repository.TagRepository;
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.Tag;
-import com.epam.esm.entity.util.QueryParameters;
+import com.epam.esm.model.entity.GiftCertificate;
+import com.epam.esm.model.entity.Tag;
+import com.epam.esm.model.entity.util.QueryParameters;
 import com.epam.esm.exception.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

@@ -1,6 +1,6 @@
 package com.epam.esm.web.link;
 
-import com.epam.esm.entity.Tag;
+import com.epam.esm.model.entity.Tag;
 import com.epam.esm.web.controller.TagsController;
 import org.springframework.stereotype.Component;
 

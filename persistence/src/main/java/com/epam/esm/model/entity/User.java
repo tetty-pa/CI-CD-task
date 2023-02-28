@@ -1,8 +1,9 @@
-package com.epam.esm.entity;
+package com.epam.esm.model.entity;
 
-import com.epam.esm.entity.audit.EntityAuditListener;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
+import com.epam.esm.model.entity.audit.EntityAuditListener;
+
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,12 @@ public class User extends AbstractEntity {
     @Column(length = 80, nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private final List<Order> orders = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", nullable = false)
-    private Role roleId;
+    private Role role;
 
     public User() {
     }
@@ -38,7 +39,7 @@ public class User extends AbstractEntity {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.roleId = roleId;
+        this.role = roleId;
     }
 
     public String getName() {
@@ -70,13 +71,12 @@ public class User extends AbstractEntity {
     }
 
     public Role getRoleId() {
-        return roleId;
+        return role;
     }
 
     public void setRoleId(Role roleId) {
-        this.roleId = roleId;
+        this.role = roleId;
     }
-
 
     @Override
     public String toString() {
@@ -85,8 +85,7 @@ public class User extends AbstractEntity {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", orders=" + orders +
-                ", roleId=" + roleId +
-                '}';
+                "}";
     }
 
     @Override
@@ -95,11 +94,15 @@ public class User extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(orders, user.orders) && Objects.equals(roleId, user.roleId);
+        return Objects.equals(name, user.name) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(orders, user.orders) &&
+                Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), name, email, password, orders, roleId);
+        return Objects.hash(super.hashCode(), name, email, password, orders, role);
     }
 }

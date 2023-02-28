@@ -1,10 +1,13 @@
-package com.epam.esm.entity;
+package com.epam.esm.model.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+
 import org.springframework.hateoas.RepresentationModel;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 
 @MappedSuperclass
 abstract public class AbstractEntity extends RepresentationModel<AbstractEntity> {

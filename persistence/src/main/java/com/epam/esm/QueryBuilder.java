@@ -1,21 +1,15 @@
 package com.epam.esm;
 
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.util.QueryParameters;
-import com.epam.esm.entity.util.SortType;
-import io.micrometer.common.util.StringUtils;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-
-import java.util.*;
-import java.util.stream.Collectors;
+/*
 
 public class QueryBuilder {
 
 
-    public static CriteriaQuery<GiftCertificate> buildGetAllByParametersQuery(QueryParameters queryParameters, CriteriaBuilder criteriaBuilder/*, CriteriaQuery<GiftCertificate> criteriaQuery*//*, Root<GiftCertificate> root*/) {
+    public static CriteriaQuery<GiftCertificate> buildGetAllByParametersQuery(QueryParameters queryParameters, CriteriaBuilder criteriaBuilder*/
+/*, CriteriaQuery<GiftCertificate> criteriaQuery*//*
+*/
+/*, Root<GiftCertificate> root*//*
+) {
         CriteriaQuery<GiftCertificate> criteriaQuery = criteriaBuilder.createQuery(GiftCertificate.class);
         Root<GiftCertificate> root = criteriaQuery.from(GiftCertificate.class);
 
@@ -70,3 +64,4 @@ public class QueryBuilder {
 
 
 }
+*/

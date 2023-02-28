@@ -1,10 +1,7 @@
 package com.epam.esm.web.link;
 
-import com.epam.esm.entity.Order;
-import com.epam.esm.web.controller.GiftCertificatesController;
+import com.epam.esm.model.entity.Order;
 import com.epam.esm.web.controller.OrdersController;
-import com.epam.esm.web.controller.TagsController;
-import com.epam.esm.web.controller.UsersController;
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;

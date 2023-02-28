@@ -1,7 +1,7 @@
 package com.epam.esm.service;
 
 
-import com.epam.esm.entity.Tag;
+import com.epam.esm.model.entity.Tag;
 
 import java.util.List;
 

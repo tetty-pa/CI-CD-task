@@ -1,12 +1,12 @@
-package com.epam.esm.entity;
+package com.epam.esm.model.entity;
 
-import com.epam.esm.entity.audit.EntityAuditListener;
+import com.epam.esm.model.entity.audit.EntityAuditListener;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;

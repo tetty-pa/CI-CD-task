@@ -1,6 +1,6 @@
 package com.epam.esm.web.link;
 
-import com.epam.esm.entity.User;
+import com.epam.esm.model.entity.User;
 import com.epam.esm.web.controller.UsersController;
 import org.springframework.stereotype.Component;
 

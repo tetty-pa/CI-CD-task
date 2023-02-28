@@ -1,8 +1,9 @@
 package com.epam.esm.service.impl;
 
 
+import com.epam.esm.exception.DuplicateEntityException;
 import com.epam.esm.repository.UserRepository;
-import com.epam.esm.entity.User;
+import com.epam.esm.model.entity.User;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.service.UserService;
 import org.springframework.data.domain.PageRequest;
@@ -31,4 +32,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user.notfoundById"));
     }
+
+    @Override
+    public User create(User user) {
+        boolean isUserExist = userRepository.findByName(user.getName()).isPresent();
+        if (isUserExist) {
+            throw new DuplicateEntityException("user.already.exist");
+        }
+        return userRepository.save(user);
+    }
+
+
 }

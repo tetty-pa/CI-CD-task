@@ -4,7 +4,7 @@ import com.epam.esm.repository.UserRepository;
 import com.epam.esm.exception.DuplicateEntityException;
 import com.epam.esm.service.TagService;
 import com.epam.esm.repository.TagRepository;
-import com.epam.esm.entity.Tag;
+import com.epam.esm.model.entity.Tag;
 import com.epam.esm.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

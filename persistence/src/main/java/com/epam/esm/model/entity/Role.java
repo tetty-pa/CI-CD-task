@@ -1,20 +1,27 @@
-package com.epam.esm.entity;
+package com.epam.esm.model.entity;
 
-import com.epam.esm.entity.audit.EntityAuditListener;
-import jakarta.persistence.*;
+import com.epam.esm.model.entity.audit.EntityAuditListener;
 
-import java.util.List;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "roles")
 @EntityListeners(EntityAuditListener.class)
 public class Role extends AbstractEntity{
+    public enum RoleType {
+        GUEST, USER, ADMIN
+    }
+
+    public static RoleType getRole(long  roleId) {
+        return RoleType.values()[(int)roleId];
+    }
 
     @Column(name = "name", length = 60, unique = true)
     private String name;
 
-
-/*    @OneToOne(mappedBy = "role_id", fetch = FetchType.LAZY)
+/*
+    @OneToMany(mappedBy = "role_id", fetch = FetchType.LAZY)
     private List<User> users;*/
 
     public Role() {

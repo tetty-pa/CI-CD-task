@@ -1,18 +1,13 @@
 package com.epam.esm.repository;
 
 
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.Tag;
-import com.epam.esm.entity.util.QueryParameters;
-import org.springframework.data.domain.Page;
+import com.epam.esm.model.entity.GiftCertificate;
+import com.epam.esm.model.entity.Tag;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 public interface GiftCertificateRepository extends JpaRepository<GiftCertificate, Long> {
@@ -27,7 +22,7 @@ public interface GiftCertificateRepository extends JpaRepository<GiftCertificate
      */
 
     List<GiftCertificate> getGiftCertificatesByNameLikeAndDescriptionLikeAndTagListIn
-    ( String name, String description, List<Tag> tagList, Pageable pageable);
+    (String name, String description, List<Tag> tagList, Pageable pageable);
 
     /**
      * Gets Gift Certificate by column name.

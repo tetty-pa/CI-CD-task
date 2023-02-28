@@ -1,8 +1,8 @@
 package com.epam.esm.service;
 
 
-import com.epam.esm.entity.GiftCertificate;
-import com.epam.esm.entity.util.QueryParameters;
+import com.epam.esm.model.entity.GiftCertificate;
+import com.epam.esm.model.entity.util.QueryParameters;
 import com.epam.esm.exception.EntityNotFoundException;
 
 import java.util.List;
