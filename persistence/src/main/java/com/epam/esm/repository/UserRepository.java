@@ -7,7 +7,12 @@ import java.util.Optional;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-
+    /**
+     * Gets User by  name.
+     *
+     * @param name User name to get
+     * @return Optional<User> user if founded or Empty if not
+     */
     Optional<User> findByName(String name);
 
 }

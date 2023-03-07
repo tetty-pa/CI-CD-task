@@ -16,10 +16,10 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
             "ORDER BY COUNT(gcht.tag_id) DESC , SUM(o.cost) DESC LIMIT 1";
 
     /**
-     * Gets Gift Certificate by column name.
+     * Gets Tag by column name.
      *
-     * @param name Gift Certificate column name to get
-     * @return Optional<GiftCertificate> Certificate if founded or Empty if not
+     * @param name Tag column name to get
+     * @return Optional<Tag> tag if founded or Empty if not
      */
     Optional<Tag> findByName(String name);
 

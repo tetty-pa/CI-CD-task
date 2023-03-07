@@ -1,19 +1,19 @@
 package com.epam.esm.service.impl.util;
 
-import com.epam.esm.model.entity.GiftCertificate;
-import com.epam.esm.model.entity.Tag;
+import com.epam.esm.model.entity.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class Constants {
 
 
-    public final static int TEST_ID = 1;
-    public final static int NOT_EXIST_ID = 100;
+    public final static long TEST_ID = 1;
+    public final static long NOT_EXIST_ID = 100;
     public final static String TEST_NAME = "1";
 
     public final static GiftCertificate FIRST_TEST_GIFT_CERTIFICATE =
@@ -44,12 +44,16 @@ public class Constants {
             Timestamp.valueOf("2023-01-04 12:07:19").toLocalDateTime().atZone(ZoneId.of("Europe/Kiev")),
             Timestamp.valueOf("2023-01-04 12:07:19").toLocalDateTime().atZone(ZoneId.of("Europe/Kiev")), 1);
 
-/*    public final static User FIRST_TEST_USER =
-            new User(1, "user1");
+    public final static User FIRST_TEST_USER =
+            new User();
     public final static User SECOND_TEST_USER =
-            new User(2, "user2");*/
+            new User();
+    public final static User USER_TO_CREATE =
+            new User("1", "1", "1", null);
+    public final static User INVALID_USER =
+            new User("", "1", "1", new Role(Role.RoleType.ADMIN.name()));
 
-/*    public final static Order FIRST_TEST_ORDER =
+    public final static Order FIRST_TEST_ORDER =
             new Order(1, new BigDecimal(1),
                     LocalDateTime.now().atZone(ZoneId.of("Europe/Kiev")),
                     FIRST_TEST_GIFT_CERTIFICATE, FIRST_TEST_USER);
@@ -62,7 +66,7 @@ public class Constants {
     public final static Order THIRD_TEST_ORDER =
             new Order(3, new BigDecimal(3),
                     null,
-                    THIRD_TEST_GIFT_CERTIFICATE, FIRST_TEST_USER);*/
+                    THIRD_TEST_GIFT_CERTIFICATE, FIRST_TEST_USER);
 
     public final static Tag FIRST_TEST_TAG =
             new Tag(1, "1");

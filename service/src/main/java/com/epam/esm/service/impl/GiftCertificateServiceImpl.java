@@ -39,7 +39,6 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
 
     @Override
     public List<GiftCertificate> getGiftCertificatesByParameters(QueryParameters queryParameters, int page, int size) {
-
         List<Tag> tagList = getTags(queryParameters);
 
         Sort sort = getSort(queryParameters);
@@ -62,11 +61,14 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
 
     private List<Tag> getTags(QueryParameters queryParameters) {
         List<Tag> tagList = new ArrayList<>();
-        for (String tagName : queryParameters.getTagNames()) {
-            Tag tag = tagRepository.findByName(tagName)
-                    .orElseThrow(() -> new EntityNotFoundException("tag.notfoundByName"));
-            tagList.add(tag);
-        }
+        List<String> tagNames = queryParameters.getTagNames();
+        if (tagNames != null ) {
+            for (String tagName : tagNames) {
+                Tag tag = tagRepository.findByName(tagName)
+                        .orElseThrow(() -> new EntityNotFoundException("tag.notfoundByName"));
+                tagList.add(tag);
+            }
+        } else tagList.addAll(tagRepository.findAll());
         return tagList;
     }
 
@@ -98,7 +100,6 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         else partOfParameter = "%" + partOfParameter + "%";
         return partOfParameter;
     }
-
 
 
     @Override

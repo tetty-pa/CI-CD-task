@@ -29,7 +29,6 @@ public class UsersController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    //@PreAuthorize("hasAnyRole('ADMIN')")
     public List<User> getAll(
             @RequestParam(value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "size", defaultValue = "25", required = false) int size) {

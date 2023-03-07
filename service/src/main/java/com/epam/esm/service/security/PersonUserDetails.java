@@ -1,4 +1,4 @@
-package com.epam.esm.web.security;
+package com.epam.esm.service.security;
 
 import com.epam.esm.model.entity.Role;
 import com.epam.esm.model.entity.User;
@@ -6,7 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 public class PersonUserDetails implements UserDetails {
 

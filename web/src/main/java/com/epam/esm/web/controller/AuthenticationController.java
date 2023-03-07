@@ -1,15 +1,13 @@
 package com.epam.esm.web.controller;
 
-
-
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.InvalidDataException;
 import com.epam.esm.model.entity.User;
 import com.epam.esm.model.jwt.AuthenticationRequest;
 import com.epam.esm.service.UserService;
+import com.epam.esm.service.security.PersonUserDetailsService;
 import com.epam.esm.web.filter.JwtUtil;
 import com.epam.esm.web.link.UserLinkAdder;
-import com.epam.esm.web.security.PersonUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,6 +39,9 @@ public class AuthenticationController {
     }
 
 
+
+
+
     @PostMapping("/authenticate")
     @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody AuthenticationRequest authenticationRequest) throws EntityNotFoundException {
@@ -57,7 +58,7 @@ public class AuthenticationController {
     }
 
 
-    @GetMapping("/signup")
+    @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public User signup(@RequestBody @Valid User user,
                        BindingResult bindingResult) {

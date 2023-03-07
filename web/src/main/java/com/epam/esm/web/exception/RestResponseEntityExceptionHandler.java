@@ -1,9 +1,6 @@
 package com.epam.esm.web.exception;
 
-import com.epam.esm.exception.DuplicateEntityException;
-import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.exception.InvalidDataException;
-import com.epam.esm.exception.InvalidParameterException;
+import com.epam.esm.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -74,5 +71,12 @@ public class RestResponseEntityExceptionHandler {
         return buildErrorResponse(e.getMessage(), 50000, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
+    @ExceptionHandler(InvalidJwtException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidJwtException(Locale locale) {
+        return buildErrorResponse(resolveResourceBundle("jwt.invalid", locale),
+                40100, HttpStatus.UNAUTHORIZED);
+    }
+    public ExceptionResponse buildNoJwtResponseObject(Locale locale) {
+        return new ExceptionResponse(resolveResourceBundle("jwt.not.exist", locale), 40101);
+    }
 }

@@ -1,4 +1,4 @@
-package com.epam.esm.web.security;
+package com.epam.esm.service.security;
 
 import com.epam.esm.model.entity.User;
 import com.epam.esm.repository.UserRepository;

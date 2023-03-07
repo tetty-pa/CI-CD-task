@@ -1,6 +1,7 @@
 package com.epam.esm.web.filter;
 
-import com.epam.esm.web.security.PersonUserDetailsService;
+import com.epam.esm.exception.InvalidJwtException;
+import com.epam.esm.service.security.PersonUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,7 +48,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            }
+            } else throw new InvalidJwtException("JWT token is expired or invalid");
+            ;
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
