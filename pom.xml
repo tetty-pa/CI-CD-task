@@ -16,6 +16,7 @@
         <module>persistence</module>
         <module>service</module>
         <module>web</module>
+        <module>coverage</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -24,6 +25,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
+        <java.version>17</java.version>
 
 
     </properties>
@@ -33,7 +39,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.1</version>
+            <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -51,6 +57,12 @@
             <artifactId>hibernate-validator</artifactId>
             <version>8.0.0.Final</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.8</version>
+        </dependency>
     </dependencies>
+
+
 </project>
