@@ -6,19 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="web" />
+        <module name="coverage" />
         <module name="persistence" />
+        <module name="web" />
         <module name="service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="controller" target="17" />
+      <module name="coverage-module" target="17" />
       <module name="untitled" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Rest-api-basics-task" options="-parameters" />
       <module name="controller" options="-parameters" />
+      <module name="coverage" options="-parameters" />
+      <module name="coverage-module" options="-parameters" />
       <module name="persistence" options="-parameters" />
       <module name="service" options="-parameters" />
       <module name="web" options="-parameters" />

@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "roles")
 @EntityListeners(EntityAuditListener.class)
 public class Role extends AbstractEntity{
+
     public enum RoleType {
         GUEST, USER, ADMIN
     }
@@ -19,7 +20,6 @@ public class Role extends AbstractEntity{
 
     @Column(name = "name", length = 60, unique = true)
     private String name;
-
 
 
     public Role() {
