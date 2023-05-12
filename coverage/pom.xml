@@ -28,11 +28,11 @@
             <artifactId>web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
+     <!--   <dependency>
             <groupId>com.epam.esm</groupId>
             <artifactId>persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
         <plugins>
