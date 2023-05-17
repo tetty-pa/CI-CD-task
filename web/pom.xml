@@ -38,7 +38,7 @@
             </plugin>
 
 
-          <!--  <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <executions>
@@ -71,7 +71,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
@@ -85,7 +85,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>web</name>
     <description>web</description>
-
+    <packaging>war</packaging>
     <properties>
         <java.version>17</java.version>
     </properties>
